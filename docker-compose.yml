@@ -1,0 +1,27 @@
+version: "3.0"
+services:
+  payment_mixer:
+    build: payment
+    ports:
+      - "8080:8080"
+    volumes:
+          - m2-repo:/root/.m2dock
+          - wallet:/root/.PaymentServicecd
+  pump:
+    build: pump
+    ports:
+      - "9002:9002"
+    tty: true
+  mixer:
+    build: mixer
+    ports:
+      - "3000:3000"
+
+volumes:
+  m2-repo:
+  wallet:
+
+networks:
+  default:
+    external:
+      name: iuno-network
